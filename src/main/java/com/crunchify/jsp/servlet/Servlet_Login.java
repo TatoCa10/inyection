@@ -9,7 +9,10 @@ import edu.co.sergio.mundo.vo.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.net.URISyntaxException;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,11 +25,11 @@ public class Servlet_Login extends HttpServlet {
     Fecha date = new Fecha();
     
     ServiciosDAO service = new ServiciosDAO();
-    edu.co.sergio.mundo.dao.Conexion conexion = new Conexion();
+    Conexion conexion = new Conexion();
     Connection connection = null;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, URISyntaxException {
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -36,7 +39,7 @@ public class Servlet_Login extends HttpServlet {
             String UserPass = request.getParameter("PassLogin");
             
             //connection = service.GenerarConexion();
-            connection = conexion.GenerarConexion();
+            connection= conexion.getConnection();
             User user= new User();
             user.setId_User(UserId);
             user.setPass(UserPass);
@@ -89,7 +92,11 @@ public class Servlet_Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Servlet_Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -103,7 +110,11 @@ public class Servlet_Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Servlet_Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

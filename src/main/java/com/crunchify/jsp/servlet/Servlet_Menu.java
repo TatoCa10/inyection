@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,18 +31,18 @@ public class Servlet_Menu extends HttpServlet {
     Fecha date = new Fecha();
     //EscrituraAccesoAleatorio eaa = new EscrituraAccesoAleatorio();
     ServiciosDAO service = new ServiciosDAO();
-    edu.co.sergio.mundo.dao.Conexion conexion = new Conexion();
+    Conexion conexion = new Conexion();
     Connection connection = null;
     ResultSet rs = null;
     Boolean b;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, URISyntaxException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             //connection = service.GenerarConexion();
-            connection = conexion.GenerarConexion();
+            connection = conexion.getConnection();
             int opcion = Integer.parseInt(request.getParameter("opcion"));
             User user= new User();
             Lote lote= new Lote();
@@ -706,6 +707,8 @@ public class Servlet_Menu extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(Servlet_Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Servlet_Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -723,6 +726,8 @@ public class Servlet_Menu extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(Servlet_Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
             Logger.getLogger(Servlet_Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
