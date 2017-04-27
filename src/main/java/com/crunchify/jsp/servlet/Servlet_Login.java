@@ -29,16 +29,18 @@ public class Servlet_Login extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-        //try (PrintWriter out = response.getWriter()) {
+        PrintWriter out = response.getWriter();
+        try  {
 
-            int UserId = Integer.parseInt(request.getParameter("IdLogin"));
-            
+            int UserId = Integer.parseInt(request.getParameter("IdLogin")); 
             String UserPass = request.getParameter("PassLogin");
+            
             //connection = service.GenerarConexion();
             connection = conexion.GenerarConexion();
             User user= new User();
             user.setId_User(UserId);
             user.setPass(UserPass);
+            
             Boolean a = service.LogIn(connection, user);
 
             if (a == true) {
@@ -72,7 +74,7 @@ public class Servlet_Login extends HttpServlet {
                 out.println("</html>");
             }
 
-        //}
+        }catch (NumberFormatException e){}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -38,7 +38,8 @@ public class Servlet_Menu extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-       // try (PrintWriter out = response.getWriter()) {
+        PrintWriter out = response.getWriter();
+        try {
             //connection = service.GenerarConexion();
             connection = conexion.GenerarConexion();
             int opcion = Integer.parseInt(request.getParameter("opcion"));
@@ -686,7 +687,7 @@ public class Servlet_Menu extends HttpServlet {
                     }
                     ;
             }
-        //}
+        }catch(SQLException e){}
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
