@@ -27,7 +27,7 @@ public class Servlet_Login extends HttpServlet {
     Fecha date = new Fecha();
 
     ServiciosDAO service = new ServiciosDAO();
-    Conexion conexion = new Conexion();
+    Conexion conexion = new Conexion(); 
     Connection connection = null;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
