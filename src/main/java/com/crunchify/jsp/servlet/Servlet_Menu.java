@@ -60,14 +60,14 @@ public class Servlet_Menu extends HttpServlet {
                     String Telefono = request.getParameter("TelUserReg");
                     
                     
-                    user.setId_User(id);
-                    user.setPass(pass);
-                    user.setNombre(Nombre);
-                    user.setApellido(Apellido);
-                    user.setCorreo(Correo);
-                    user.setTelefono(Telefono);
+                    //user.setId_User(id);
+                    //user.setPass(pass);
+                    //user.setNombre(Nombre);
+                    //user.setApellido(Apellido);
+                    //user.setCorreo(Correo);
+                    //user.setTelefono(Telefono);
 
-                    b = service.insertarUser(connection, user);
+                    b = service.insertarUser(connection, id,pass,Nombre,Apellido,Correo,Telefono);
 
                     if (b == true) {
                         out.println("<!DOCTYPE html>");

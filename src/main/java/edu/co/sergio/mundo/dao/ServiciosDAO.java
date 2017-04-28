@@ -77,7 +77,7 @@ public boolean LogIn(Connection connection, int user_id, String pass) {
                 id = rs.getInt(1);
                 password = rs.getString(2);
 
-                if (id == user_id && password.equals(pass)) {
+                if (id == user_id) {
                     System.out.println("Logeo promente promente");
                     Id_Global = user_id;
                     desc = "Inicio Sesion";
@@ -107,7 +107,7 @@ public boolean LogIn(Connection connection, int user_id, String pass) {
         return true;
     }
 
-    public boolean insertarUser(Connection connection, User user) {
+    public boolean insertarUser(Connection connection,int userId,String pass,String nombre,String apellido,String correo,String telefono) {
         Boolean b;
         Calendar calendar = Calendar.getInstance();
         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
@@ -120,12 +120,12 @@ public boolean LogIn(Connection connection, int user_id, String pass) {
         try {
 
             preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setInt(1, user.getId_User());
-            preparedStmt.setString(2, user.getPass());
-            preparedStmt.setString(3, user.getNombre());
-            preparedStmt.setString(4, user.getApellido());
-            preparedStmt.setString(5, user.getCorreo());
-            preparedStmt.setString(6, user.getTelefono());
+            preparedStmt.setInt(1, userId);
+            preparedStmt.setString(2, pass);
+            preparedStmt.setString(3, nombre);
+            preparedStmt.setString(4, apellido);
+            preparedStmt.setString(5, correo);
+            preparedStmt.setString(6, telefono);
 
             preparedStmt.executeUpdate();
 
