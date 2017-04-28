@@ -1,6 +1,5 @@
 package com.crunchify.jsp.servlet;
 
-
 import edu.co.sergio.mundo.dao.Conexion;
 import edu.co.sergio.mundo.dao.Fecha;
 
@@ -11,6 +10,10 @@ import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.net.URISyntaxException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -23,27 +26,27 @@ import javax.servlet.http.HttpServletResponse;
 public class Servlet_Login extends HttpServlet {
 
     Fecha date = new Fecha();
-    
+
     ServiciosDAO service = new ServiciosDAO();
     Conexion conexion = new Conexion();
     Connection connection = null;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, URISyntaxException {
+            throws ServletException, IOException, URISyntaxException, SQLException {
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try  {
+        try {
 
-            int UserId = Integer.parseInt(request.getParameter("IdLogin")); 
+            int UserId = Integer.parseInt(request.getParameter("IdLogin"));
             String UserPass = request.getParameter("PassLogin");
-            
+
             //connection = service.GenerarConexion();
-            connection= conexion.getConnection();
-            User user= new User();
+            connection = conexion.getConnection();
+            User user = new User();
             user.setId_User(UserId);
             user.setPass(UserPass);
-            
+
             Boolean a = service.LogIn(connection, user);
 
             if (a == true) {
@@ -57,9 +60,28 @@ public class Servlet_Login extends HttpServlet {
                 out.println("<p>" + date.getDate() + "</p>");
                 out.println("<p>" + UserId + "</p>");
                 out.println("<p>" + UserPass + "</p>");
-                out.println("<p>" + a + "</p>");
-                out.println("</body>");
-                out.println("</html>");
+
+                String query = "select * from Users";
+
+                PreparedStatement preparedStmt = null;
+
+                int id;
+                String password;
+
+                try {
+                    Statement st = connection.createStatement();
+                    ResultSet rs = st.executeQuery(query);
+                    out.println("<p>" + "Id: -> " + rs.getInt(1) + "</p>");
+                    out.println("<p>" + "Pass: -> " + rs.getString(2) + "</p>");
+                    out.println("<p>" + rs.getString(3) + "</p>");
+                    out.println("<p>" + rs.getString(4) + "</p>");
+                    out.println("<p>" + rs.getString(5) + "</p>");
+                    out.println("<p>" + rs.getString(6) + "</p>");
+                    out.println("<p>" + a + "</p>");
+                    out.println("</body>");
+                    out.println("</html>");
+                } catch (NumberFormatException e) {
+                }
             } else {
 
                 out.println("<html>");
@@ -72,12 +94,35 @@ public class Servlet_Login extends HttpServlet {
                 out.println("<p>" + date.getDate() + "</p>");
                 out.println("<p>" + UserId + "</p>");
                 out.println("<p>" + UserPass + "</p>");
+
+                String query = "select * from Users";
+
+                PreparedStatement preparedStmt = null;
+
+                int id;
+                String password;
+
+                try {
+                    Statement st = connection.createStatement();
+                    ResultSet rs = st.executeQuery(query);
+                    out.println("<p>" + "Id: -> " + rs.getInt(1) + "</p>");
+                    out.println("<p>" + "Pass: -> " + rs.getString(2) + "</p>");
+                    out.println("<p>" + rs.getString(3) + "</p>");
+                    out.println("<p>" + rs.getString(4) + "</p>");
+                    out.println("<p>" + rs.getString(5) + "</p>");
+                    out.println("<p>" + rs.getString(6) + "</p>");
+                    out.println("<p>" + a + "</p>");
+                    out.println("</body>");
+                    out.println("</html>");
+                } catch (NumberFormatException e) {
+                }
                 out.println("<p>" + a + "</p>");
                 out.println("</body>");
                 out.println("</html>");
             }
 
-        }catch (NumberFormatException e){}
+        } catch (NumberFormatException e) {
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -96,6 +141,8 @@ public class Servlet_Login extends HttpServlet {
             processRequest(request, response);
         } catch (URISyntaxException ex) {
             Logger.getLogger(Servlet_Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Servlet_Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -113,6 +160,8 @@ public class Servlet_Login extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (URISyntaxException ex) {
+            Logger.getLogger(Servlet_Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(Servlet_Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

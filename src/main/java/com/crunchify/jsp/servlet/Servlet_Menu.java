@@ -43,10 +43,11 @@ public class Servlet_Menu extends HttpServlet {
         try {
             //connection = service.GenerarConexion();
             connection = conexion.getConnection();
-            int opcion = Integer.parseInt(request.getParameter("opcion"));
             User user= new User();
             Lote lote= new Lote();
             Item item= new Item();
+            int opcion = Integer.parseInt(request.getParameter("opcion"));
+            
             
             
             switch (opcion) {
@@ -77,7 +78,7 @@ public class Servlet_Menu extends HttpServlet {
                         out.println("</head>");
                         out.println("<body>");
                         out.println("<h1>El Usuario Se Agrego Satisfactoriamente...</h1>");
-                        out.println("<p>Serás dirigido automáticamente en cinco segundos al menu principal. En caso contrario, puedes acceder registrar otro Lote, haciendo click <a href=" + "CrearUser.html" + ">Aquí</a></p>");
+                        out.println("<p>Seras dirigido automaticamente en cinco segundos al menu principal. En caso contrario, puedes acceder registrar otro Lote, haciendo click <a href=" + "CrearUser.html" + ">Aquí</a></p>");
                         out.println("</body>");
                         out.println("</html>");
                     } else {
@@ -89,7 +90,7 @@ public class Servlet_Menu extends HttpServlet {
                         out.println("</head>");
                         out.println("<body>");
                         out.println("<h1>No fue posible agregar el Usuario, el Id ya existe, intente nuevamente...</h1>");
-                        out.println("<p>Serás dirigido automáticamente en cinco segundos al menu principal. En caso contrario, puedes acceder registrar otro Lote, haciendo click <a href=" + "CrearUser.html" + ">Aquí</a></p>");
+                        out.println("<p>Seras dirigido automaticamente en cinco segundos al menu principal. En caso contrario, puedes acceder registrar otro Lote, haciendo click <a href=" + "CrearUser.html" + ">Aquí</a></p>");
                         out.println("</body>");
                         out.println("</html>");
                     }

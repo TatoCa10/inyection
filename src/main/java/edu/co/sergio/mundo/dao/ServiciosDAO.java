@@ -109,10 +109,6 @@ public class ServiciosDAO {
         Boolean b;
         Calendar calendar = Calendar.getInstance();
         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
-        
-        
-        
-        
 
         String query = " insert into Users (user_id, pass, Nombre, Apellido, Correo, Telefono)"
                 + " values (?, ?, ?, ?, ?, ?)";
