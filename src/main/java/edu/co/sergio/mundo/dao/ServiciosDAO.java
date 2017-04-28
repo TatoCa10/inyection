@@ -59,7 +59,7 @@ public boolean LogIn(Connection connection, int user_id, String pass) {
         
         
         // the mysql select statement
-        String query = "select user_id, pass from Users where user_id=" + user_id + " and pass='" + pass + "'";
+        String query = "select user_id from Users where user_id="+user_id+"";
 
         // create the mysql update and insert preparedstatement
         PreparedStatement preparedStmt = null;
@@ -73,9 +73,9 @@ public boolean LogIn(Connection connection, int user_id, String pass) {
 
             while (rs.next()) {
                 id = rs.getInt(1);
-                password = rs.getString(2);
+                //password = rs.getString(2);
 
-                if (id == user_id && password.equals(pass)) {
+                if (id == user_id ) {
                     System.out.println("Logeo promente promente");
                     Id_Global = user_id;
                     desc = "Inicio Sesion";
