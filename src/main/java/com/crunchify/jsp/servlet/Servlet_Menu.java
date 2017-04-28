@@ -46,6 +46,7 @@ public class Servlet_Menu extends HttpServlet {
             User user= new User();
             Lote lote= new Lote();
             Item item= new Item();
+            
             int opcion = Integer.parseInt(request.getParameter("opcion"));
             
             
@@ -66,8 +67,8 @@ public class Servlet_Menu extends HttpServlet {
                     //user.setApellido(Apellido);
                     //user.setCorreo(Correo);
                     //user.setTelefono(Telefono);
-
-                    b = service.insertarUser(connection, id,pass,Nombre,Apellido,Correo,Telefono);
+                    b=true;
+                    //b = service.insertarUser(connection, id,pass,Nombre,Apellido,Correo,Telefono);
 
                     if (b == true) {
                         out.println("<!DOCTYPE html>");
@@ -78,6 +79,8 @@ public class Servlet_Menu extends HttpServlet {
                         out.println("</head>");
                         out.println("<body>");
                         out.println("<h1>El Usuario Se Agrego Satisfactoriamente...</h1>");
+                        out.println("<h1>"+id+"</h1>");
+                        out.println("<h1>"+Nombre+"</h1>");
                         out.println("<p>Seras dirigido automaticamente en cinco segundos al menu principal. En caso contrario, puedes acceder registrar otro Lote, haciendo click <a href=" + "CrearUser.html" + ">Aquí</a></p>");
                         out.println("</body>");
                         out.println("</html>");
