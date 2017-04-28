@@ -77,7 +77,7 @@ public boolean LogIn(Connection connection, int user_id, String pass) {
                 id = rs.getInt(1);
                 password = rs.getString(2);
 
-                if (id == user_id && password.equals(rs.getString(2)) ) {
+                if (id == user_id && password.equals(pass)) {
                     System.out.println("Logeo promente promente");
                     Id_Global = user_id;
                     desc = "Inicio Sesion";
