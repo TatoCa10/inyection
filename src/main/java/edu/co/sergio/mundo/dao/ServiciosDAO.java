@@ -52,14 +52,14 @@ public class ServiciosDAO {
         Fecha date = new Fecha();
         String desc;
 
-    public boolean LogIn(Connection connection, User user) {
+public boolean LogIn(Connection connection, int user_id, String pass) {
 
         Calendar calendar = Calendar.getInstance();
         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
         
         
         // the mysql select statement
-        String query = "select user_id, pass from Users where user_id=" + user.getId_User() + " and pass='" + user.getPass() + "'";
+        String query = "select user_id, pass from Users where user_id=" + user_id + " and pass='" + pass + "'";
 
         // create the mysql update and insert preparedstatement
         PreparedStatement preparedStmt = null;
@@ -75,9 +75,9 @@ public class ServiciosDAO {
                 id = rs.getInt(1);
                 password = rs.getString(2);
 
-                if (id == user.getId_User() && password.equals(user.getPass())) {
+                if (id == user_id && password.equals(pass)) {
                     System.out.println("Logeo promente promente");
-                    Id_Global = user.getId_User();
+                    Id_Global = user_id;
                     desc = "Inicio Sesion";
                     RegistroAct(connection, desc);
                     return true;
