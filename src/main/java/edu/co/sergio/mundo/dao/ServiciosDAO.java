@@ -66,7 +66,7 @@ public boolean LogIn(Connection connection, int user_id, String pass) {
         PreparedStatement preparedStmt = null;
 
         int id;
-        String password="";
+        String password=""; 
 
         try {
             Statement st = connection.createStatement();
