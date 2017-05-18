@@ -47,6 +47,7 @@ public class Servlet_Menu extends HttpServlet {
             Lote lote= new Lote();
             Item item= new Item();
             
+            
             int opcion = Integer.parseInt(request.getParameter("opcion"));
             
             
